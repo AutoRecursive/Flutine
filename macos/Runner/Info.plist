@@ -28,5 +28,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSDocumentsDirectory</key>
+	<string>允许访问文档目录</string>
 </dict>
 </plist>

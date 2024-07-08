@@ -9,12 +9,12 @@ class TodoItem extends StatelessWidget {
   final Function() onEdited;
 
   const TodoItem({
-    Key? key,
+    super.key,
     required this.todo,
     required this.onStatusChanged,
     required this.onTap,
     required this.onEdited,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +29,11 @@ class TodoItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(todo.description),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             'Status: ${todo.status.toString().split('.').last}',
             style: const TextStyle(
-              color: const Color.fromARGB(255, 33, 32, 32),
+              color: Color.fromARGB(255, 33, 32, 32),
               fontSize: 12,
             ),
           ),

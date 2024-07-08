@@ -2,14 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application/screens/edit_todo_screen.dart';
 import '../models/todo.dart';
 import '../widgets/todo_list.dart';
+import '../services/storage_service.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Todo> _todos = [];
+  final StorageService _storageService = StorageService();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTodos();
+  }
+
+  Future<void> _loadTodos() async {
+    final todos = await _storageService.loadTodos();
+    setState(() {
+      _todos = todos;
+    });
+  }
+
+  Future<void> _saveTodos() async {
+    await _storageService.saveTodos(_todos);
+  }
 
   void _addTodo() {
     setState(() {
@@ -20,12 +41,14 @@ class _HomeScreenState extends State<HomeScreen> {
         status: TodoStatus.notStarted,
       );
       _todos.add(newTodo);
+      _saveTodos();
     });
   }
 
   void _deleteTodo(String id) {
     setState(() {
       _todos.removeWhere((todo) => todo.id == id);
+      _saveTodos();
     });
   }
 
@@ -39,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() {
               final index = _todos.indexWhere((todo) => todo.id == id);
               _todos[index] = editedTodo;
+              _saveTodos();
             });
           },
         ),
@@ -56,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           status: TodoStatus.notStarted,
         );
       }).toList();
+      _saveTodos();
     });
   }
 
@@ -65,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
       todo.status = todo.status == TodoStatus.finished
           ? TodoStatus.notStarted
           : TodoStatus.finished;
+      _saveTodos();
     });
   }
 
@@ -86,6 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         return todo;
       }).toList();
+      _saveTodos();
     });
   }
 
@@ -93,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutine'),
+        title: const Text('Flutine: Streamline Routines with Flutter'),
       ),
       body: TodoList(
         todos: _todos,
@@ -108,14 +135,14 @@ class _HomeScreenState extends State<HomeScreen> {
           FloatingActionButton(
             onPressed: _addTodo,
             tooltip: 'Add Todo',
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           FloatingActionButton(
             onPressed: _resetTodos,
             tooltip: 'Reset Todos',
-            child: Icon(Icons.refresh),
             heroTag: null,
+            child: const Icon(Icons.refresh),
           ),
         ],
       ),

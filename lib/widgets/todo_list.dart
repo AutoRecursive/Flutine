@@ -10,13 +10,13 @@ class TodoList extends StatelessWidget {
   final Function(String) onTodoEdited;
 
   const TodoList({
-    Key? key,
+    super.key,
     required this.todos,
     required this.onTodoStatusChanged,
     required this.onTodoDeleted,
     required this.onTodoToggled,
     required this.onTodoEdited,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +37,16 @@ class TodoList extends StatelessWidget {
               return await showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: Text('Delete?'),
-                  content: Text('This action cannot be undone.'),
+                  title: const Text('Delete?'),
+                  content: const Text('This action cannot be undone.'),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(false),
-                      child: Text('Keep it'),
+                      child: const Text('Keep it'),
                     ),
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(true),
-                      child: Text('Delete'),
+                      child: const Text('Delete'),
                     ),
                   ],
                 ),
@@ -60,15 +60,15 @@ class TodoList extends StatelessWidget {
           background: Container(
             color: Colors.redAccent,
             alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 16),
-            child: Icon(Icons.delete, color: Colors.white),
+            padding: const EdgeInsets.only(left: 16),
+            child: const Icon(Icons.delete, color: Colors.white),
           ),
           secondaryBackground: Container(
             color: Colors.greenAccent,
             alignment: Alignment.centerRight,
-            padding: EdgeInsets.only(right: 16),
+            padding: const EdgeInsets.only(right: 16),
             child:
-                Icon(Icons.edit, color: Colors.white), // 更改图标为 toggle_on
+                const Icon(Icons.edit, color: Colors.white), // 更改图标为 toggle_on
           ),
           child: TodoItem(
             todo: todo,

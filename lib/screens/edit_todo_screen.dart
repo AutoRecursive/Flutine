@@ -6,10 +6,10 @@ class EditTodoScreen extends StatefulWidget {
   final Function(Todo) onTodoEdited;
 
   const EditTodoScreen({
-    Key? key,
+    super.key,
     required this.todo,
     required this.onTodoEdited,
-  }) : super(key: key);
+  });
 
   @override
   _EditTodoScreenState createState() => _EditTodoScreenState();
@@ -38,7 +38,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Todo'),
+        title: const Text('Edit Todo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
