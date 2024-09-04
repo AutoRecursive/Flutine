@@ -12,10 +12,10 @@ class EditTodoScreen extends StatefulWidget {
   });
 
   @override
-  _EditTodoScreenState createState() => _EditTodoScreenState();
+  EditTodoScreenState createState() => EditTodoScreenState();
 }
 
-class _EditTodoScreenState extends State<EditTodoScreen> {
+class EditTodoScreenState extends State<EditTodoScreen> {
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
 

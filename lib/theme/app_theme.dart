@@ -35,8 +35,8 @@ class AppTheme {
           bodyMedium: TextStyle(fontSize: 16),
         ),
         checkboxTheme: CheckboxThemeData(
-          fillColor: MaterialStateProperty.all(primaryColor),
-          checkColor: MaterialStateProperty.all(textColor),
+          fillColor: WidgetStateProperty.all(primaryColor),
+          checkColor: WidgetStateProperty.all(textColor),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4),
           ),
